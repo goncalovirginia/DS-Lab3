@@ -6,10 +6,7 @@ import jakarta.ws.rs.core.Response.Status;
 import sd2122.aula3.api.User;
 import sd2122.aula3.api.service.RestUsers;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 
 @Singleton
@@ -110,18 +107,15 @@ public class UsersResource implements RestUsers {
 			throw new WebApplicationException(Status.BAD_REQUEST);
 		}
 		
-		return getUsersWithPattern(pattern.toLowerCase());
-	}
-	
-	private List<User> getUsersWithPattern(String pattern) {
 		if (pattern.equals("")) {
 			return users.values().stream().toList();
 		}
 		
+		String patternLowerCase = pattern.toLowerCase();
 		List<User> usersWithPattern = new LinkedList<>();
 		
 		for (User user : users.values()) {
-			if (user.getFullName().toLowerCase().contains(pattern)) {
+			if (user.getFullName().toLowerCase().contains(patternLowerCase)) {
 				usersWithPattern.add(new User(user.getUserId(), user.getFullName(), user.getEmail(), ""));
 			}
 		}
