@@ -35,7 +35,7 @@ public interface RestUsers {
 	@GET
 	@Path("/{" + USER_ID + "}")
 	@Produces(MediaType.APPLICATION_JSON)
-	User getUser(@PathParam(USER_ID) String userId, @QueryParam(PASSWORD) String password);
+	User getUser(@PathParam(USER_ID) String userId, @DefaultValue("") @QueryParam(PASSWORD) String password);
 	
 	/**
 	 * Modifies the information of a user. Values of null in any field of the user
@@ -52,7 +52,7 @@ public interface RestUsers {
 	@Path("/{" + USER_ID + "}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	User updateUser(@PathParam(USER_ID) String userId, @QueryParam(PASSWORD) String password, User user);
+	User updateUser(@PathParam(USER_ID) String userId, @DefaultValue("") @QueryParam(PASSWORD) String password, User user);
 	
 	/**
 	 * Deletes the user identified by userId. The spreadsheets owned by the user
@@ -66,7 +66,7 @@ public interface RestUsers {
 	@DELETE
 	@Path("/{" + USER_ID + "}")
 	@Produces(MediaType.APPLICATION_JSON)
-	User deleteUser(@PathParam(USER_ID) String userId, @QueryParam(PASSWORD) String password);
+	User deleteUser(@PathParam(USER_ID) String userId, @DefaultValue("") @QueryParam(PASSWORD) String password);
 	
 	/**
 	 * Returns the list of users for which the pattern is a substring of the name
