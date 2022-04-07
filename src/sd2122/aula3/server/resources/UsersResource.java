@@ -104,27 +104,29 @@ public class UsersResource implements RestUsers {
 	public List<User> searchUsers(String pattern) {
 		Log.info("searchUsers : pattern = " + pattern);
 		
-		//Check if the pattern is null or empty
+		//Check if the pattern is null
 		if (pattern == null) {
 			Log.info("Pattern null.");
 			throw new WebApplicationException(Status.BAD_REQUEST);
 		}
 		
+		return getUsersWithPattern(pattern.toLowerCase());
+	}
+	
+	private List<User> getUsersWithPattern(String pattern) {
 		if (pattern.equals("")) {
 			return users.values().stream().toList();
 		}
 		
-		List<User> userList = new LinkedList<>();
-		String patternLowerCase = pattern.toLowerCase();
+		List<User> usersWithPattern = new LinkedList<>();
 		
-		for (String userId : users.keySet()) {
-			if (userId.toLowerCase().contains(patternLowerCase)) {
-				User user = users.get(userId);
-				userList.add(new User(user.getUserId(), user.getFullName(), user.getEmail(), ""));
+		for (User user : users.values()) {
+			if (user.getFullName().toLowerCase().contains(pattern)) {
+				usersWithPattern.add(new User(user.getUserId(), user.getFullName(), user.getEmail(), ""));
 			}
 		}
 		
-		return userList;
+		return usersWithPattern;
 	}
 	
 }
