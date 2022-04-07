@@ -1,16 +1,16 @@
 package sd2122.aula3.server.resources;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response.Status;
 import sd2122.aula3.api.User;
 import sd2122.aula3.api.service.RestUsers;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
 @Singleton
 public class UsersResource implements RestUsers {
