@@ -3,6 +3,8 @@ package sd2122.aula3.server;
 import org.glassfish.jersey.jdkhttp.JdkHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import sd2122.aula3.server.resources.UsersResource;
+import sd2122.aula3.server.util.CustomLoggingFilter;
+import sd2122.aula3.server.util.GenericExceptionMapper;
 import util.Debug;
 
 import java.net.InetAddress;
@@ -28,8 +30,8 @@ public class UsersServer {
 			
 			ResourceConfig config = new ResourceConfig();
 			config.register(UsersResource.class);
-			//config.register(CustomLoggingFilter.class);
-			//config.register(GenericExceptionMapper.class);
+			config.register(CustomLoggingFilter.class);
+			config.register(GenericExceptionMapper.class);
 			
 			String ip = InetAddress.getLocalHost().getHostAddress();
 			String serverURI = String.format(SERVER_URI_FMT, ip, PORT);
